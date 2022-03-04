@@ -1,13 +1,13 @@
 param (
   [Parameter()]
   [switch]
-  $UninstallSpotifyStoreEdition = (Read-Host -Prompt 'Uninstall Spotify Windows Store edition if it exists (Y/N)') -eq 'y',
+  $UninstallSpotifyStoreEdition = (Read-Host -Prompt 'Odinstalowaæ star¹ wersje Spotify? (Y/N)') -eq 'y',
   [Parameter()]
   [switch]
   $UpdateSpotify,
   [Parameter()]
   [switch]
-  $RemoveAdPlaceholder = (Read-Host -Prompt 'Optional - Remove ad placeholder and upgrade button. (Y/N)') -eq 'y'
+  $RemoveAdPlaceholder = (Read-Host -Prompt 'Opcjonalnie – Usun¹æ symbol zastêpczy reklamy i przycisk uaktualnienia. (Y/N)') -eq 'y'
 )
 
 # Ignore errors from `Stop-Process`
@@ -76,10 +76,10 @@ function Get-File
       $targetStream.Write($buffer, 0, $count)
       $count = $responseStream.Read($buffer, 0, $buffer.length)
       $downloadedBytes = $downloadedBytes + $count
-      Write-Progress -Activity "Downloading file '$downloadedFileName'" -Status "Downloaded ($([System.Math]::Floor($downloadedBytes/1024))K of $($totalLength)K): " -PercentComplete ((([System.Math]::Floor($downloadedBytes / 1024)) / $totalLength) * 100)
+      Write-Progress -Activity "Pobieranie pliku '$downloadedFileName'" -Status "Downloaded ($([System.Math]::Floor($downloadedBytes/1024))K of $($totalLength)K): " -PercentComplete ((([System.Math]::Floor($downloadedBytes / 1024)) / $totalLength) * 100)
     }
 
-    Write-Progress -Activity "Finished downloading file '$downloadedFileName'"
+    Write-Progress -Activity "Pobieranie pliku zosta³o zakoñczone sukcesem. '$downloadedFileName'"
 
     $targetStream.Flush()
     $targetStream.Close()
@@ -112,15 +112,14 @@ function Test-SpotifyVersion
 
 Write-Host @'
 *****************
-@mrpond message:
-#Thailand #ThaiProtest #ThailandProtest #freeYOUTH
-Please retweet these hashtag, help me stop dictator government!
+@Usterka wiadomoœæ:
+STOP WOJNIE.
 *****************
 '@
 
 Write-Host @'
 *****************
-Authors: @Nuzair46, @KUTlime
+Autor: @Usterka
 *****************
 '@
 
@@ -141,7 +140,7 @@ if ($PSVersionTable.PSVersion.Major -ge 7)
 
 if (Get-AppxPackage -Name SpotifyAB.SpotifyMusic)
 {
-  Write-Host "The Microsoft Store version of Spotify has been detected which is not supported.`n"
+  Write-Host "Wersja Spotify systemowa wykryta, b³¹d sygnalizacji.`n"
 
   if ($UninstallSpotifyStoreEdition)
   {
@@ -150,7 +149,7 @@ if (Get-AppxPackage -Name SpotifyAB.SpotifyMusic)
   }
   else
   {
-    Read-Host "Exiting...`nPress any key to exit..."
+    Read-Host "Opuszczanie...`nNaciœnij jakiœ klawisz..."
     exit
   }
 }
@@ -166,11 +165,11 @@ try
 catch
 {
   Write-Output $_
-  Read-Host 'Press any key to exit...'
+  Read-Host 'Naciœnij jakiœ klawisz aby wyjœæ...'
   exit
 }
 
-Write-Host "Downloading latest patch (chrome_elf.zip)...`n"
+Write-Host "Pobieranie najnowszego blokera (usterka.zip)...`n"
 $elfPath = Join-Path -Path $PWD -ChildPath 'chrome_elf.zip'
 try
 {
