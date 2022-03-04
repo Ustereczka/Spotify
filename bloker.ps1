@@ -1,13 +1,13 @@
 param (
   [Parameter()]
   [switch]
-  $UninstallSpotifyStoreEdition = (Read-Host -Prompt 'Odinstalowaæ star¹ wersje Spotify? (Y/N)') -eq 'y',
+  $UninstallSpotifyStoreEdition = (Read-Host -Prompt 'Odinstalowac stara wersje Spotify? (Y/N)') -eq 'y',
   [Parameter()]
   [switch]
   $UpdateSpotify,
   [Parameter()]
   [switch]
-  $RemoveAdPlaceholder = (Read-Host -Prompt 'Opcjonalnie – Usun¹æ symbol zastêpczy reklamy i przycisk uaktualnienia. (Y/N)') -eq 'y'
+  $RemoveAdPlaceholder = (Read-Host -Prompt 'Opcjonalnie – Usunac symbol zastepczy reklamy i przycisk uaktualnienia. (Y/N)') -eq 'y'
 )
 
 # Ignore errors from `Stop-Process`
@@ -112,14 +112,7 @@ function Test-SpotifyVersion
 
 Write-Host @'
 *****************
-@Usterka wiadomoœæ:
 STOP WOJNIE.
-*****************
-'@
-
-Write-Host @'
-*****************
-Autor: @Usterka
 *****************
 '@
 
@@ -129,7 +122,7 @@ $spotifyApps = Join-Path -Path $spotifyDirectory -ChildPath 'Apps'
 
 [System.Version] $actualSpotifyClientVersion = (Get-ChildItem -LiteralPath $spotifyExecutable -ErrorAction:SilentlyContinue).VersionInfo.ProductVersionRaw
 
-Write-Host "Stopping Spotify...`n"
+Write-Host "Zatrzymywanie Spotify...`n"
 Stop-Process -Name Spotify
 Stop-Process -Name SpotifyWebHelper
 
@@ -140,7 +133,7 @@ if ($PSVersionTable.PSVersion.Major -ge 7)
 
 if (Get-AppxPackage -Name SpotifyAB.SpotifyMusic)
 {
-  Write-Host "Wersja Spotify systemowa wykryta, b³¹d sygnalizacji.`n"
+  Write-Host "Wersja Spotify systemowa wykryta, blad sygnalizacji.`n"
 
   if ($UninstallSpotifyStoreEdition)
   {
@@ -149,7 +142,7 @@ if (Get-AppxPackage -Name SpotifyAB.SpotifyMusic)
   }
   else
   {
-    Read-Host "Opuszczanie...`nNaciœnij jakiœ klawisz..."
+    Read-Host "Opuszczanie...`nNacisnij jakis klawisz..."
     exit
   }
 }
@@ -165,7 +158,7 @@ try
 catch
 {
   Write-Output $_
-  Read-Host 'Naciœnij jakiœ klawisz aby wyjœæ...'
+  Read-Host 'Nacisnij jakis klawisz aby wyjsc...'
   exit
 }
 
@@ -208,7 +201,7 @@ if (-not $spotifyInstalled -or $UpdateSpotify -or $unsupportedClientVersion)
   catch
   {
     Write-Output $_
-    Read-Host 'Press any key to exit...'
+    Read-Host 'Nacisnij jakis klawisz aby wyjsc...'
     exit
   }
   New-Item -Path $spotifyDirectory -ItemType:Directory -Force | Write-Verbose
@@ -278,7 +271,7 @@ if ((Test-Path $elfDllBackFilePath) -eq $false)
   Move-Item -LiteralPath "$elfBackFilePath" -Destination "$elfDllBackFilePath" | Write-Verbose
 }
 
-Write-Host 'Patching Spotify...'
+Write-Host 'Aktualizowanie Spotify...'
 $patchFiles = (Join-Path -Path $PWD -ChildPath 'chrome_elf.dll'), (Join-Path -Path $PWD -ChildPath 'config.ini')
 
 Copy-Item -LiteralPath $patchFiles -Destination "$spotifyDirectory"
@@ -356,15 +349,14 @@ Pop-Location
 
 Remove-Item -LiteralPath $tempDirectory -Recurse
 
-Write-Host 'Patching Complete, starting Spotify...'
+Write-Host 'Aktualizowanie, startowanie Spotify...'
 
 Start-Process -WorkingDirectory $spotifyDirectory -FilePath $spotifyExecutable
-Write-Host 'Done.'
+Write-Host 'Instalacja Zakonczona sukcesem.'
 
 Write-Host @'
 *****************
 @mrpond message:
-#Thailand #ThaiProtest #ThailandProtest #freeYOUTH
-Please retweet these hashtag, help me stop dictator government!
+STOP WOJNIE
 *****************
 '@
