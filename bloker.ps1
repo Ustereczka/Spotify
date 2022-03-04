@@ -1,4 +1,3 @@
-$PSDefaultParameterValues['*:Encoding'] = 'utf8'
 param (
   [Parameter()]
   [switch]
