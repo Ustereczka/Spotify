@@ -7,5 +7,5 @@ POBIERZ PLIK:
 
 + BlokerByTetu
 
-
+!URUCHOM PLIK
 ```
