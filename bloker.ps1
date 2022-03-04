@@ -7,7 +7,7 @@ param (
   $UpdateSpotify,
   [Parameter()]
   [switch]
-  $RemoveAdPlaceholder = (Read-Host -Prompt 'Opcjonalnie: Usun¹c symbol zastepczy reklamy i przycisk uaktualnienia. (Y/N)') -eq 'y'
+  $RemoveAdPlaceholder = (Read-Host -Prompt 'Opcjonalnie: Usunac symbol zastepczy reklamy i przycisk uaktualnienia. (Y/N)') -eq 'y'
 )
 
 # Ignore errors from `Stop-Process`
