@@ -1,2 +1,0 @@
-# usterka
-Bloker Reklam Spotify 
